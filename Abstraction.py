@@ -5,11 +5,10 @@ from abc import ABC, abstractmethod
 
 class AbstractVendingMachine(ABC):
     def __init__(self):
-        self.name = ""
-        self.price = 0
-        self.selection = 0  # indicator for item selection
-        self.money_rest = 0  # indicator for money difference for the client
-        print("WELCOME TO THE VENDING MACHINE:")
+        self.name: str
+        self.price: float
+        self.selection: int
+        self.money_rest: float
 
     @abstractmethod
     def display_menu(self):
@@ -24,20 +23,23 @@ class AbstractVendingMachine(ABC):
         pass
 
     def last_phase(self):
-        self.display_menu()
-        self.selection = self.select_item()
-        self.payment()
+        pass
 
 class VendingMachine(AbstractVendingMachine):
     def __init__(self):
-        super().__init__()
+        # Initilization for values of variables
+        self.name = ""
+        self.price = 0
+        self.selection = 0  # indicator for item selection
+        self.money_rest = 0  # indicator for money difference for the client
+        
         self.items = {
             1: {'name': 'Item1', 'price': 20},
             2: {'name': 'Item2', 'price': 30},
             3: {'name': 'Item3', 'price': 35},
             4: {'name': 'Item4', 'price': 40}
         }
-
+        print("WELCOME TO THE VENDING MACHINE:")
     def display_menu(self):
         print("The Menu is as follows:")
         for key, value in self.items.items():
@@ -66,7 +68,14 @@ class VendingMachine(AbstractVendingMachine):
         self.money_rest = amount - item_price
         print("Thank you for using the Vending Machine!")   
         print("Your change is:", self.money_rest)
+    
+    
+    def last_phase(self):
+        self.display_menu()
+        self.selection = self.select_item()
+        self.payment()
 
-# Example usage:
+# Main Function
 vm = VendingMachine()
 vm.last_phase()
+
