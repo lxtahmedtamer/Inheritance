@@ -35,7 +35,7 @@ class Product(AbstractProduct):
     
 
     def set_product_name(self, name):
-        self. self.product_selection:str
+        self.product_selection:str
         self.product_selection = name
 
     def get_product_name(self):
