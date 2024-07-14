@@ -108,6 +108,6 @@ vm.set_selection(4)
 selected_number=vm.get_selection()
 vm.Selecting_Product(selected_number)
 vm.set_amount(100.5)
-budget=vm.get_amount()  # Correct usage of get_amount() method
+budget=vm.get_amount()  
 vm.payment(budget)
 
