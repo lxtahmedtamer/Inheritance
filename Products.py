@@ -71,59 +71,59 @@ class Product(AbstractProduct):
 class HotDrink(Product):
     def HotDrink_Menu(self,product_name):
         HotDrink_list = ["Tea", "Nescafe", "Hot Chocolate"]
-        y=input(print("Choose one of Hot Drinks available:", HotDrink_list))
-        while y not in  ColdDrink_list :
+        product_element=input(print("Choose one of Hot Drinks available:", HotDrink_list))
+        while product_element not in  ColdDrink_list :
            print("WRONG, Choose one of Hot Drinks available:",HotDrink_list)
-           y =input()
+           product_element =input()
         
         self.product_selection=product_name
         self.product_price()
         self.set_amount(input("Please enter the money you own: "))
-        self.product_payment(y)
+        self.product_payment(product_element)
 class ColdDrink(Product):
     
    
     def ColdDrink_Menu(self,product_name):
         ColdDrink_list = ["Pepsi", "Seven up", "Mirinda"]
        
-        y=input(print("Choose one of Cold Drinks available:", ColdDrink_list))
-        while y not in  ColdDrink_list :
+        product_element=input(print("Choose one of Cold Drinks available:", ColdDrink_list))
+        while product_element not in  ColdDrink_list :
            print("WRONG, Choose one of Cold Drinks available:",ColdDrink_list)
-           y =input()
+           product_element =input()
         
         self.product_selection=product_name
         self.product_price()
         self.set_amount(input("Please enter the money you own: "))
-        self.product_payment(y)
+        self.product_payment(product_element)
 
 class Snack(Product):
     
     
     def Snack_Menu(self,product_name):
         Snack_list = ["Chipsy", "Cheetos", "Doritos"]
-        y=input(print("Choose one of Snacks available:", Snack_list))
-        while y not in  Snack_list :
+        product_element=input(print("Choose one of Snacks available:", Snack_list))
+        while product_element not in  Snack_list :
            print("WRONG, Choose one of Snacks available:",Snack_list)
-           y =input()
+           product_element =input()
         
         self.product_selection=product_name
         self.product_price()
         self.set_amount(input("Please enter the money you own: "))
-        self.product_payment(y)
+        self.product_payment(product_element)
 
 class Icecream(Product):
     
     def Icecream_Menu(self,product_name):
         Icecream_list = ["Chocolate", "Vanilla", "Strawberry"]
-        y=input(print("Choose one of Flavors available:", Icecream_list))
-        while y not in  Icecream_list :
+        product_element=input(print("Choose one of Flavors available:", Icecream_list))
+        while product_element not in  Icecream_list :
            print("WRONG, Choose one of Snacks available:",Icecream_list)
-           y =input()
+           product_element =input()
         
         self.product_selection=product_name
         self.product_price()
         self.set_amount(input("Please enter the money you own: "))
-        self.product_payment(y)
+        self.product_payment(product_element)
 
 # Main Product selection
 obj = Product()
@@ -131,26 +131,26 @@ obj.set_product_name("Snack")
 
 if obj.get_product_name() == "Hot Drink":
     hot_obj = HotDrink()
-    x=obj.get_product_name()
-    hot_obj.HotDrink_Menu(x)
+    product_choice=obj.get_product_name()
+    hot_obj.HotDrink_Menu(product_choice)
     
     
 elif obj.get_product_name() == "Cold Drink":
     cold_obj = ColdDrink()
-    x=obj.get_product_name()
-    cold_obj.ColdDrink_Menu(x)
+    product_choice=obj.get_product_name()
+    cold_obj.ColdDrink_Menu(product_choice)
    
     
 elif obj.get_product_name() == "Snack":
     snack_obj = Snack()
-    x=obj.get_product_name()
-    snack_obj.Snack_Menu(x)
+    product_choice=obj.get_product_name()
+    snack_obj.Snack_Menu(product_choice)
 
     
 elif obj.get_product_name() == "Ice Cream":
     icecream_obj = Icecream()
-    x=obj.get_product_name()
-    icecream_obj.Icecream_Menu(x)
+    product_choice=obj.get_product_name()
+    icecream_obj.Icecream_Menu(product_choice)
 
 else:
     print("You chose an unavailable product")
