@@ -19,9 +19,6 @@ class AbstractProduct(ABC):
 
    
 
-    @abstractmethod
-    def select_product(self, y):
-        pass
 
     @abstractmethod
     def product_price(self):
@@ -47,13 +44,6 @@ class Product(AbstractProduct):
     def get_amount(self):
         return self.amount
 
-    def select_product(self, y):
-        Product_list = ["Hot Drink", "Cold Drink", "Snack", "Ice Cream"]
-        #print("Products available in Vending Machine are:", Product_list)
-        while y not in Product_list:
-            y = input("Please Enter your Product Cateogry again ")
-        return y
-
     def product_price(self):
         if self.product_selection == "Hot Drink":
             self.cost = 20
@@ -65,7 +55,8 @@ class Product(AbstractProduct):
             self.cost = 50    
         print(f"Price for {self.product_selection}: ${self.cost}")    
 
-    def product_payment(self):
+    def product_payment(self,b):
+        no3=b
         budget = self.get_amount()  # Get amount as float
         while budget <= 0:
             budget = float(input("Invalid amount. Please insert a positive amount: "))
@@ -74,69 +65,92 @@ class Product(AbstractProduct):
             budget = float(input(f"Please insert enough money to buy {self.product_selection}: "))
         
         self.money_rest = budget - self.cost
-        print("Thank you for using the Vending Machine!")   
+        print(f"you have chosen {no3}")   
         print("Your remaining money =", self.money_rest)   
-
+        print("Thank you for using the Vending Machine!")   
 class HotDrink(Product):
-    def HotDrink_Menu(self):
+    def HotDrink_Menu(self,product_name):
         HotDrink_list = ["Tea", "Nescafe", "Hot Chocolate"]
-        print("Hot Drinks available are", HotDrink_list)
-        self.product_selection = self.select_product(input("Choose a Hot Drink product: "))
+        y=input(print("Choose one of Hot Drinks available:", HotDrink_list))
+        while y not in  ColdDrink_list :
+           print("WRONG, Choose one of Hot Drinks available:",HotDrink_list)
+           y =input()
+        
+        self.product_selection=product_name
         self.product_price()
         self.set_amount(input("Please enter the money you own: "))
-        self.product_payment()
-
+        self.product_payment(y)
 class ColdDrink(Product):
     
    
-    def ColdDrink_Menu(self):
+    def ColdDrink_Menu(self,product_name):
         ColdDrink_list = ["Pepsi", "Seven up", "Mirinda"]
-        print("Cold Drinks available are", ColdDrink_list)
-        self.product_selection = self.select_product(input("Choose a Cold Drink product: "))
+       
+        y=input(print("Choose one of Cold Drinks available:", ColdDrink_list))
+        while y not in  ColdDrink_list :
+           print("WRONG, Choose one of Cold Drinks available:",ColdDrink_list)
+           y =input()
+        
+        self.product_selection=product_name
         self.product_price()
         self.set_amount(input("Please enter the money you own: "))
-        self.product_payment()
+        self.product_payment(y)
 
 class Snack(Product):
     
     
-    def Snack_Menu(self):
+    def Snack_Menu(self,product_name):
         Snack_list = ["Chipsy", "Cheetos", "Doritos"]
-        print("Snacks available are", Snack_list)
-        self.product_selection = self.select_product(input("Choose a Snack product: "))
+        y=input(print("Choose one of Snacks available:", Snack_list))
+        while y not in  Snack_list :
+           print("WRONG, Choose one of Snacks available:",Snack_list)
+           y =input()
+        
+        self.product_selection=product_name
         self.product_price()
         self.set_amount(input("Please enter the money you own: "))
-        self.product_payment()
+        self.product_payment(y)
 
 class Icecream(Product):
     
-    def Icecream_Menu(self):
+    def Icecream_Menu(self,product_name):
         Icecream_list = ["Chocolate", "Vanilla", "Strawberry"]
-        print("Ice Cream Flavors available are", Icecream_list)
-        self.product_selection = self.select_product(input("Choose an Ice Cream flavor: "))
+        y=input(print("Choose one of Flavors available:", Icecream_list))
+        while y not in  Icecream_list :
+           print("WRONG, Choose one of Snacks available:",Icecream_list)
+           y =input()
+        
+        self.product_selection=product_name
         self.product_price()
         self.set_amount(input("Please enter the money you own: "))
-        self.product_payment()
+        self.product_payment(y)
 
 # Main Product selection
 obj = Product()
-obj.set_product_name("Cold Drink")
+obj.set_product_name("Snack")
 
 if obj.get_product_name() == "Hot Drink":
     hot_obj = HotDrink()
-    hot_obj.HotDrink_Menu()
+    x=obj.get_product_name()
+    hot_obj.HotDrink_Menu(x)
+    
     
 elif obj.get_product_name() == "Cold Drink":
     cold_obj = ColdDrink()
-    cold_obj.ColdDrink_Menu()
+    x=obj.get_product_name()
+    cold_obj.ColdDrink_Menu(x)
+   
     
 elif obj.get_product_name() == "Snack":
     snack_obj = Snack()
-    snack_obj.Snack_Menu()
+    x=obj.get_product_name()
+    snack_obj.Snack_Menu(x)
 
+    
 elif obj.get_product_name() == "Ice Cream":
     icecream_obj = Icecream()
-    icecream_obj.Icecream_Menu()
+    x=obj.get_product_name()
+    icecream_obj.Icecream_Menu(x)
 
 else:
     print("You chose an unavailable product")
