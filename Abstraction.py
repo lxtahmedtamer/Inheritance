@@ -4,78 +4,110 @@ This Code shows the concept of Abstraction as defining a layout for any Vending 
 from abc import ABC, abstractmethod
 
 class AbstractVendingMachine(ABC):
-    def __init__(self):
-        self.name: str
-        self.price: float
-        self.selection: int
-        self.money_rest: float
+    
+   
+
+    @abstractmethod
+    def set_amount(self, amount):
+        pass
+
+    @abstractmethod
+    def get_amount(self):
+        pass
+
+    @abstractmethod
+    def set_selection(self, amount):
+        pass
+
+    @abstractmethod
+    def get_selection(self):
+        pass
 
     @abstractmethod
     def display_menu(self):
         pass
 
-    @abstractmethod
-    def select_item(self):
-        pass
+  
 
     @abstractmethod
     def payment(self):
         pass
 
-    def last_phase(self):
-        pass
+    
 
-class VendingMachine(AbstractVendingMachine):
-    def __init__(self):
-        # Initilization for values of variables
-        self.name = ""
-        self.price = 0
-        self.selection = 0  # indicator for item selection
-        self.money_rest = 0  # indicator for money difference for the client
+
         
-        self.items = {
-            1: {'name': 'Item1', 'price': 20},
-            2: {'name': 'Item2', 'price': 30},
-            3: {'name': 'Item3', 'price': 35},
-            4: {'name': 'Item4', 'price': 40}
-        }
-        print("WELCOME TO THE VENDING MACHINE:")
-    def display_menu(self):
-        print("The Menu is as follows:")
-        for key, value in self.items.items():
-            print(f"{key}: {value['name']} - {value['price']}")
+        
+class VendingMachine(AbstractVendingMachine):
+   
+    def set_amount(self, amount):
+        self.selection:float
+        self.amount=amount
 
-    def select_item(self):
-        self.selection = int(input("Choose a number from 1 to 4: "))
+    
+    def get_amount(self):
+        return self.amount
+
+    def set_selection(self, select):
+        self.selection:int 
+        self.selection=select
+
+    
+    def get_selection(self):
+        return self.selection   
+
+    def display_menu(self):
+        # changing the dict to this
+        self.Products_List = ["product1","product2","product3","product4"]
+        self.Prices_List=[30,40,50,60]
+        print("The Menu is as follows:")
+        
+        for i in range(len(self.Products_List)):
+            print(f"{self.Products_List[i]}: ${self.Prices_List[i]}")
+        
+
+    def Selecting_Product(self,select):
+        
+        self.selection = select
         while self.selection < 1 or self.selection > 4:
-            self.selection = int(input("Sorry, please enter a valid number from 1 to 4: "))
+            self.set_selection( int(input("Sorry, Please enter a valid number from 1 to 4: ")))
+            self.selection=self.get_selection()
+        if self.selection==1:
+            #Product1
+            self.price=self.Prices_List[0]
+            
+        elif self.selection==2:
+            #Product2
+            self.price=self.Prices_List[1]
+        elif self.selection==3:
+            #Product3
+            self.price=self.Prices_List[2]
+        elif self.selection==4:
+            #Product4
+            self.price=self.Prices_List[3]       
+        
         return self.selection
 
-    def payment(self):
-        amount = float(input("Please insert money: "))
+    def payment(self,pay):
+        amount=pay
         while amount <= 0:
             amount = float(input("Invalid amount. Please insert a positive amount: "))
+        while amount < self.price:
+            amount = float(input(f"Please insert enough money to buy {self.Products_List[self.selection-1]}: "))
         
-        item = self.items.get(self.selection)
-        if item is None:
-            print("Invalid selection.")
-            return
-        
-        item_price = item['price']
-        while amount < item_price:
-            amount = float(input(f"Please insert enough money to buy {item['name']}: "))
-        
-        self.money_rest = amount - item_price
+        self.money_rest = amount - self.price
         print("Thank you for using the Vending Machine!")   
         print("Your change is:", self.money_rest)
     
     
-    def last_phase(self):
-        self.display_menu()
-        self.selection = self.select_item()
-        self.payment()
-
+    
 # Main Function
 vm = VendingMachine()
-vm.last_phase()
+vm.display_menu()
+vm.set_selection(4)
+selected_number=vm.get_selection()
+vm.Selecting_Product(selected_number)
+vm.set_amount(100.5)
+budget=vm.get_amount()  # Correct usage of get_amount() method
+vm.payment(budget)
 
